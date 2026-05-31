@@ -3,11 +3,12 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductPage {
@@ -18,6 +19,8 @@ public class ProductPage {
     //ancestor::div[@class='inventory_item_description']//button
     ////button[@class='btn btn_primary btn_small btn_inventory ']
     By productNameEle = By.cssSelector("div[class='inventory_item_name']");
+    By productSortEle = By.className("product_sort_container");
+    By productPriceEle = By.xpath("//div[@class ='inventory_item_price']");
 
     public ProductPage(WebDriver driver)
     {
@@ -57,6 +60,35 @@ public class ProductPage {
 
         button.click();
         System.out.println("Button clicked!");
+    }
+
+    private Select sortDropdown()
+    {
+        WebElement productEle = driver.findElement(productSortEle);
+        return new Select(productEle);
+    }
+    public void sortProducts(String sortOption)
+    {
+        sortDropdown().selectByVisibleText(sortOption);
+    }
+
+    public String getfirstSelectedOption()
+    {
+        return sortDropdown().getFirstSelectedOption().getText();
+    }
+    public String getFirstProductPrice()
+    {
+        return driver.findElement(productPriceEle).getText();
+    }
+    public List<String> getAllProductPrice()
+    {
+        List<WebElement> allProductPrices = driver.findElements(productPriceEle);
+        List<String> prices = new ArrayList<>();
+        for(WebElement price :allProductPrices)
+        {
+            prices.add(price.getText());
+        }
+        return prices;
     }
 
     

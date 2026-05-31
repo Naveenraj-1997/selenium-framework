@@ -34,4 +34,8 @@ public class ConfigReader {
     {
         return properties.getProperty("password");
     }
+    public String getProductName()
+    {
+        return properties.getProperty("productname");
+    }
 }

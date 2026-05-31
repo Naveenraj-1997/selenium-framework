@@ -20,7 +20,17 @@ public class ProductsTest extends BaseTest{
     }
     @Test
     public void verifyclickAddtocart() throws InterruptedException {
-        products.clickAddToCart("Sauce Labs Bike Light");
+        products.clickAddToCart(config.getProductName());
+    }
+    @Test
+    public void verifyProductSortdropdown()
+    {
+        products.sortProducts("Price (high to low)");
+        Assert.assertEquals(products.getfirstSelectedOption(), "Price (high to low)");
+        System.out.println("The selected option is "+products.getfirstSelectedOption());
+
+        Assert.assertEquals(products.getFirstProductPrice(), "$49.99");
+        System.out.println("The first option price is "+products.getFirstProductPrice());
     }
 
 }
