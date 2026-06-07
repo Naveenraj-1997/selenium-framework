@@ -38,4 +38,12 @@ public class ConfigReader {
     {
         return properties.getProperty("productname");
     }
+    public String getAlertURL()
+    {
+        return properties.getProperty("alertUrl");
+    }
+    public String getIframeURL()
+    {
+        return properties.getProperty("IframeUrl");
+    }
 }
