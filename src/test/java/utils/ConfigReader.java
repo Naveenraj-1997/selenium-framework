@@ -50,4 +50,8 @@ public class ConfigReader {
     {
         return properties.getProperty("WindowsUrl");
     }
+    public String getMouseActionURL()
+    {
+        return properties.getProperty("MouseActionURL");
+    }
 }

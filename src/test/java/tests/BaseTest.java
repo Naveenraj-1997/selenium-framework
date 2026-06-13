@@ -34,6 +34,7 @@ public class BaseTest {
     AlertPage alertPage;
     IframePage iframePage;
     WindowsPage windowspage;
+    MouseActionsPage mouseactionspage;
     ConfigReader config;
     ExtentReports extent;
     ExtentTest extentTest;
@@ -63,6 +64,7 @@ public class BaseTest {
         alertPage = new AlertPage(driver);
         iframePage = new IframePage(driver);
         windowspage = new WindowsPage(driver);
+        mouseactionspage = new MouseActionsPage(driver);
         extent = ExtentReportManager.getInstance();
         extentTest = ExtentReportManager.createTest(method.getName());
     }
