@@ -13,10 +13,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pages.AlertPage;
-import pages.IframePage;
-import pages.LoginPage;
-import pages.ProductPage;
+import pages.*;
 import utils.ConfigReader;
 import utils.ExtentReportManager;
 
@@ -36,6 +33,7 @@ public class BaseTest {
     ProductPage products;
     AlertPage alertPage;
     IframePage iframePage;
+    WindowsPage windowspage;
     ConfigReader config;
     ExtentReports extent;
     ExtentTest extentTest;
@@ -64,6 +62,7 @@ public class BaseTest {
         products = new ProductPage(driver);
         alertPage = new AlertPage(driver);
         iframePage = new IframePage(driver);
+        windowspage = new WindowsPage(driver);
         extent = ExtentReportManager.getInstance();
         extentTest = ExtentReportManager.createTest(method.getName());
     }

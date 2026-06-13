@@ -46,4 +46,8 @@ public class ConfigReader {
     {
         return properties.getProperty("IframeUrl");
     }
+    public String getWindowURL()
+    {
+        return properties.getProperty("WindowsUrl");
+    }
 }
