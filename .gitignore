@@ -36,3 +36,10 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# Reports and Screenshots
+reports/
+screenshots/
+
+# Logs
+*.log
