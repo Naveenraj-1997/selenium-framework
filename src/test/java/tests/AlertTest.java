@@ -9,7 +9,7 @@ public class AlertTest extends BaseTest{
     @BeforeMethod
     public void alertSetup()
     {
-        driver.get(config.getAlertURL());
+        getDriver().get(config.getAlertURL());
     }
 
     @Test

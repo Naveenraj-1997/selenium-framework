@@ -2,7 +2,6 @@ package tests;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import com.beust.jcommander.FuzzyMap;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -17,7 +16,6 @@ import pages.*;
 import utils.ConfigReader;
 import utils.ExtentReportManager;
 
-import javax.imageio.IIOException;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -28,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BaseTest {
-    WebDriver driver;
+    private ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     LoginPage loginPage;
     ProductPage products;
     AlertPage alertPage;
@@ -38,6 +36,10 @@ public class BaseTest {
     ConfigReader config;
     ExtentReports extent;
     ExtentTest extentTest;
+
+    public WebDriver getDriver() {
+        return driver.get();
+    }
 
     @BeforeMethod
     public void setup(Method method) throws InterruptedException {
@@ -55,16 +57,16 @@ public class BaseTest {
         prefs.put("profile.password_manager_leak_detection", false);
         options.setExperimentalOption("prefs", prefs);
 
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        driver.get(config.getUrl());
-        loginPage = new LoginPage(driver);
-        products = new ProductPage(driver);
-        alertPage = new AlertPage(driver);
-        iframePage = new IframePage(driver);
-        windowspage = new WindowsPage(driver);
-        mouseactionspage = new MouseActionsPage(driver);
+        driver.set(new ChromeDriver(options));
+        getDriver().manage().window().maximize();
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        getDriver().get(config.getUrl());
+        loginPage = new LoginPage(getDriver());
+        products = new ProductPage(getDriver());
+        alertPage = new AlertPage(getDriver());
+        iframePage = new IframePage(getDriver());
+        windowspage = new WindowsPage(getDriver());
+        mouseactionspage = new MouseActionsPage(getDriver());
         extent = ExtentReportManager.getInstance();
         extentTest = ExtentReportManager.createTest(method.getName());
     }
@@ -73,7 +75,7 @@ public class BaseTest {
         if(ITestResult.FAILURE == result.getStatus())
         {
             extentTest.fail(result.getThrowable());
-            TakesScreenshot ts =(TakesScreenshot) driver;
+            TakesScreenshot ts =(TakesScreenshot) getDriver();
            File screenshot =  ts.getScreenshotAs(OutputType.FILE);
            try{
                String timeStamp = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(new Date());
@@ -90,6 +92,7 @@ public class BaseTest {
              extentTest.skip("Test Skipped");
         }
         extent.flush();
-        driver.quit();
+        getDriver().quit();
+        driver.remove();
     }
 }

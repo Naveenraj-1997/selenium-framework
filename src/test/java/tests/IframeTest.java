@@ -9,7 +9,7 @@ public class IframeTest extends BaseTest{
 @BeforeMethod
     public void IframeSetup()
 {
-    driver.get(config.getIframeURL());
+    getDriver().get(config.getIframeURL());
 }
 
 @Test

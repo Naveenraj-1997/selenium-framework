@@ -9,7 +9,7 @@ public class WindowsTest extends BaseTest{
     @BeforeMethod
     public void windowSetup()
     {
-        driver.get(config.getWindowURL());
+        getDriver().get(config.getWindowURL());
     }
     @Test
     public void verifyNewWindow()

@@ -17,7 +17,7 @@ public class LoginTest extends BaseTest {
     public void validlogintest() throws InterruptedException {
         loginPage.login(config.getUsername(), config.getPassword());
         Thread.sleep(2000);
-        Assert.assertEquals(driver.getTitle(), "Swag Labs");
+        Assert.assertEquals(getDriver().getTitle(), "Swag Labs");
 
     }
 
@@ -38,7 +38,7 @@ public class LoginTest extends BaseTest {
         loginPage.login(username,password);
         if(expectedResult)
         {
-            Assert.assertEquals(driver.getTitle(), "Swag Labs");
+            Assert.assertEquals(getDriver().getTitle(), "Swag Labs");
             System.out.println(tcNo +" Valid login test " + testCaseName);
         }else{
             Assert.assertTrue(loginPage.isErrorMessageDisplayed());

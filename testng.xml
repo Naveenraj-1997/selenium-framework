@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name = "Automation Suite">
+<suite name = "Automation Suite" parallel="tests" thread-count="3">
 <test name="Login Test">
     <classes>
         <class name="tests.LoginTest" />
@@ -9,6 +9,23 @@
     <test name="Products Test">
         <classes>
             <class name="tests.ProductsTest" />
+        </classes>
+    </test>
+    <test name = "Windows Test">
+        <classes>
+            <class name="tests.WindowsTest">
+
+            </class>
+        </classes>
+    </test>
+    <test name="Mouse Actions Tests">
+        <classes>
+            <class name="tests.MouseActionsTest"/>
+        </classes>
+    </test>
+    <test name="Alerts Tests">
+        <classes>
+            <class name="tests.AlertTest"/>
         </classes>
     </test>
 </suite>

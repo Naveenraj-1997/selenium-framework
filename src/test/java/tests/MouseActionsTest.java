@@ -9,7 +9,7 @@ public class MouseActionsTest extends BaseTest{
     @BeforeMethod
     public void mouseactionSetup()
     {
-        driver.get(config.getMouseActionURL());
+        getDriver().get(config.getMouseActionURL());
     }
 
     @Test
@@ -18,11 +18,11 @@ public class MouseActionsTest extends BaseTest{
         mouseactionspage.mouseHoverElement(mouseactionspage.getUserimage(0));
         String caption = mouseactionspage.getCaptionText(0);
         System.out.println("caption "+ caption);
-        Assert.assertTrue(caption.contains("name"));
+        Assert.assertTrue(caption.contains("user1"));
     }
     @Test
     public void verifyDragAndDrop() throws InterruptedException {
-        driver.get("https://the-internet.herokuapp.com/drag_and_drop");
+        getDriver().get("https://the-internet.herokuapp.com/drag_and_drop");
         System.out.println("Before drag: " + mouseactionspage.getColumnAText());
         mouseactionspage.DragAndDrop();
         Thread.sleep(2000);
