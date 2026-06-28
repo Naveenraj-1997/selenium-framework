@@ -2,6 +2,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name = "Automation Suite" parallel="tests" thread-count="3">
 <test name="Login Test">
+    <groups>
+        <run>
+            <include name="valid"/>
+        </run>
+    </groups>
     <classes>
         <class name="tests.LoginTest" />
     </classes>

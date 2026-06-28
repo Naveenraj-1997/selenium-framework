@@ -13,7 +13,7 @@ public class LoginTest extends BaseTest {
     {
         return ExcelUtils.getExcelData("src/test/resources/testdata.xlsx","LoginData");
     }
-    @Test
+    @Test(priority = 1, groups = {"valid"}, enabled = true)
     public void validlogintest() throws InterruptedException {
         loginPage.login(config.getUsername(), config.getPassword());
         Thread.sleep(2000);
@@ -21,14 +21,14 @@ public class LoginTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(priority = 2,groups = {"invalid"},enabled = true , dependsOnMethods = {"validlogintest"})
     public void invalidLogintest() throws InterruptedException {
         loginPage.login(config.getUsername(), "Test");
         Thread.sleep(2000);
         Assert.assertTrue(loginPage.isErrorMessageDisplayed());
         Assert.assertEquals(loginPage.getErrorMessage(), "Epic sadface: Username and password do not match any user in this service");
     }
-    @Test(dataProvider = "excellogindata")
+    @Test(priority = 3,groups = {"invalid"}, dataProvider = "excellogindata", enabled = false)
     public void loginTestFromExcel(String tcNo,
                                    String testCaseName,
                                    String username,
